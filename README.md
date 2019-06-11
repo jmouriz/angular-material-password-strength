@@ -1,3 +1,13 @@
+Material Password Strength Input for AngularJS
+
+This is a refactor of original [nickel.minStrength](https://github.com/mralexandernickel/nickel.minStrength) of Alexander Nickel
+
+## Demo
+
+View [online demo](https://jmouriz.github.io/angular-material-password-strength/demo)
+
+## Original README
+
 A directive for Angular to validate the strength of passwords
 =============================================================
 
