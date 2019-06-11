@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html ng-app="Demo">
+  <head>
+    <base href="../" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>AngularJS Material Password Strength Validation Demo</title>
+    <link rel="stylesheet" href="https://unpkg.com/angular-material@^1.1.4/angular-material.min.css"></link>
+    <link rel="stylesheet" href="demo/resources/styles/demo.css"></link>
+  </head>
+  <body>
+    <div flex layout="row" layout-align="center center">
+      <md-card flex="40" class="md-padding" ng-controller="Demo">
+        <h2 class="md-headline">AngularJS Material Password Strength Validation Demo</h2>
+        <p class="md-body-1">Here you can set different strength levels</p>
+        <md-input-container>
+          <label>Miminum Strength Level</label>
+          <input type="number" min="1" max="4" ng-model="score">
+        </md-input-container>
+        <p class="md-body-1">Here you can test your passwords</p>
+        <form name="signup">
+          <md-input-container class="md-block">
+            <label>Password</label>
+            <input name="password" type="password" ng-model="password" md-password-strength="{{score}}" ng-minlength="6" autocomplete="off" required>
+            <div ng-messages="signup.password.$error">
+              <div ng-message="required">Required</div>
+              <div ng-message="minlength">Password is too short</div>
+              <div ng-message="mdPasswordStrength">
+                <div ng-if="zxcvbn.feedback.warning.length">{{zxcvbn.feedback.warning}}.</div>
+                <div ng-repeat="suggestion in zxcvbn.feedback.suggestions">{{suggestion}}.</div>
+                <div ng-if="zxcvbn.score < score">You're very close to the perfect password, just add some random characters!</div>
+              </div>
+            </div>
+          </md-input-container>
+          <div layout="row" layout-align="end center">
+            <md-button class="md-primary" href="https://github.com/jmouriz/angular-material-password-strength" aria-label="See on Github" target="_blank">See on Github</md-button>
+            <md-button class="md-primary" ng-disabled="signup.password.$viewValue.length < 1" aria-label="Show Info" ng-click="info(signup.password.$viewValue, $event)">Show Info</md-button>
+            <md-button class="md-raised md-primary" ng-disabled="!signup.$valid" aria-label="Submit">Submit</md-button>
+          </div>
+        </form>
+      </md-card>
+    </div>
+    <script src="https://unpkg.com/angular@^1.6.5/angular.min.js"></script>
+    <script src="https://unpkg.com/angular-aria@^1.6.5/angular-aria.min.js"></script>
+    <script src="https://unpkg.com/angular-animate@^1.6.5/angular-animate.min.js"></script>
+    <script src="https://unpkg.com/angular-messages@^1.6.5/angular-messages.min.js"></script>
+    <script src="https://unpkg.com/angular-sanitize@^1.6.5/angular-sanitize.min.js"></script>
+    <script src="https://unpkg.com/angular-material@^1.1.4/angular-material.min.js"></script>
+    <script src="https://unpkg.com/@contentpass/zxcvbn@4.4.3/dist/zxcvbn.js"></script>
+    <!-- script src="build/angular-material-password-strength.min.js"></script -->
+    <script src="source/angular-material-password-strength.js"></script>
+    <script src="demo/controllers/demo.js"></script>
+  </body>
+</html>
