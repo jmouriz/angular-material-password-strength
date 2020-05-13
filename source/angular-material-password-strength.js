@@ -30,13 +30,14 @@
             });
             controller.$validators.mdPasswordStrength = function() {
                var mdPasswordStrength = strength();
-               if (controller.$viewValue != null) {
+               if (controller.$viewValue) {
                   var passwordStrength = zxcvbn(controller.$viewValue, {
                      feedback_messages: password.messages
                   });
                   scope.zxcvbn = passwordStrength;
                   return passwordStrength.score >= mdPasswordStrength;
                }
+               return true;
             };
             return strength = function() {
                var mdPasswordStrength = getter(scope);
